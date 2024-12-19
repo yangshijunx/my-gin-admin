@@ -92,6 +92,7 @@ func Routers() *gin.Engine {
 		systemRouter.InitAuthorityBtnRouterRouter(PrivateGroup)     // 按钮权限管理
 		systemRouter.InitSysExportTemplateRouter(PrivateGroup)      // 导出模板
 		systemRouter.InitSysParamsRouter(PrivateGroup, PublicGroup) // 参数管理
+		systemRouter.InitSysHandelFileRouter(PrivateGroup)          // 文件操作封装
 		exampleRouter.InitCustomerRouter(PrivateGroup)              // 客户路由
 		exampleRouter.InitFileUploadAndDownloadRouter(PrivateGroup) // 文件上传下载功能路由
 
@@ -104,6 +105,8 @@ func Routers() *gin.Engine {
 	initBizRouter(PrivateGroup, PublicGroup)
 
 	global.GVA_ROUTERS = Router.Routes()
+	// 打印注册的所有路由
+	//fmt.Printf("registered router %v", global.GVA_ROUTERS)
 
 	global.GVA_LOG.Info("router register success")
 	return Router
