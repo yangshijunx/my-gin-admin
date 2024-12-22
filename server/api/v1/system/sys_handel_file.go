@@ -9,6 +9,16 @@ import (
 type SysHandelFileApi struct {
 }
 
+// AnalyzeExcel 解析上传的 Excel 文件
+// @Tags SysHandelFileApi
+// @Summary 解析上传的 Excel 文件
+// @Security ApiKeyAuth
+// @accept multipart/form-data
+// @Produce application/json
+// @Param file formData file true "上传的 Excel 文件"
+// @Success 200 {object} response.Response "{"success":true,"data":{},"msg":"解析成功"}"
+// @Failure 400 {object} response.Response "{"success":false,"data":{},"msg":"文件上传失败/上传文件类型错误/解析文件失败"}"
+// @Router /sysHandelFile/analyzeExcel [post]
 func (s *SysHandelFileApi) AnalyzeExcel(c *gin.Context) {
 	file, err := c.FormFile("file") // "excel" 是前端表单中字段的名称
 	if err != nil {
