@@ -10,6 +10,8 @@ func (g *GoodRouter) InitGoodsRouter(Router *gin.RouterGroup) (R gin.IRoutes) {
 		baseRouter.POST("createGoods", goodApi.CreateGoods)
 		//	新增商品类目
 		baseRouter.POST("createCategory", goodApi.CreateCategory)
+		//	获取所有的商品类目
+		baseRouter.GET("getAllCategory", goodApi.GetAllCategory)
 	}
 	return baseRouter
 }
