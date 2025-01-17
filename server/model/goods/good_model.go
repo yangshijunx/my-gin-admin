@@ -32,13 +32,6 @@ type GoodBrand struct {
 	Name string `json:"name" gorm:"comment:品牌名称"` // 品牌名称
 }
 
-// 商品库存
-type GoodInventory struct {
-	global.GVA_MODEL
-	GoodID uint `json:"good_id" gorm:"comment:商品ID"` // 外键，关联商品
-	Stock  int  `json:"stock" gorm:"comment:库存数量"`   // 库存数量
-}
-
 // 商品价格
 type GoodPrice struct {
 	global.GVA_MODEL
@@ -72,7 +65,7 @@ type GoodModel struct {
 	Category    GoodCategory  `json:"category" gorm:"foreignKey:CategoryID"` // 商品分类
 	Brand       GoodBrand     `json:"brand" gorm:"foreignKey:BrandID"`       // 商品品牌
 	Price       GoodPrice     `json:"price" gorm:"foreignKey:GoodID"`        // 商品价格
-	Inventory   GoodInventory `json:"inventory" gorm:"foreignKey:GoodID"`    // 商品库存
+	Inventory   uint          `json:"inventory" gorm:"comment:库存数量"`         // 商品库存
 	Images      []GoodImage   `json:"images" gorm:"foreignKey:GoodID"`       // 商品图片列表
 	Tags        []GoodTag     `json:"tags" gorm:"foreignKey:GoodID"`         // 商品标签
 	Specs       []GoodSpec    `json:"specs" gorm:"foreignKey:GoodID"`        // 商品规格
@@ -93,10 +86,6 @@ func (GoodBrand) TableName() string {
 
 func (GoodPrice) TableName() string {
 	return "good_price"
-}
-
-func (GoodInventory) TableName() string {
-	return "good_inventory"
 }
 
 func (GoodImage) TableName() string {

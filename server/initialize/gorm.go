@@ -67,7 +67,6 @@ func RegisterTables() {
 		goods.GoodCategory{},
 		goods.GoodBrand{},
 		goods.GoodImage{},
-		goods.GoodInventory{},
 		goods.GoodPrice{},
 		goods.GoodSpec{},
 		goods.GoodTag{},

@@ -32,3 +32,9 @@ func (g *GoodService) GetCategoryById(id uint) (goods.GoodCategory, error) {
 	err := global.GVA_DB.Where("id = ?", id).First(&category).Error
 	return category, err
 }
+
+// 创建Brand品牌
+func (g *GoodService) CreateBrand(brand goods.GoodBrand) (goods.GoodBrand, error) {
+	err := global.GVA_DB.Create(&brand).Error
+	return brand, err
+}

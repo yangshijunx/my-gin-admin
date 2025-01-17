@@ -17,4 +17,5 @@ var (
 	ChangePasswordVerify   = Rules{"Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"AuthorityId": {NotEmpty()}}
 	CreateCategoryVerify   = Rules{"Name": {NotEmpty()}}
+	CreateGoodsVerify      = Rules{"Name": {NotEmpty()}}
 )

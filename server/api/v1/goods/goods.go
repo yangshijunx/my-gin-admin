@@ -1,6 +1,7 @@
 package goods
 
 import (
+	"fmt"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/goods"
@@ -85,4 +86,28 @@ func (g *GoodApi) GetAllCategory(c *gin.Context) {
 		global.GVA_LOG.Info("获取商品分类成功!")
 		response.OkWithDetailed(category, "获取成功", c)
 	}
+}
+
+func (g *GoodApi) CreateBrand(c *gin.Context) {
+	var r systemReq.CreateGoods
+	err := c.ShouldBindJSON(&r)
+	if err != nil {
+		response.FailWithMessage("参数异常", c)
+		return
+	}
+	err = utils.Verify(r, utils.CreateGoodsVerify)
+	if err != nil {
+		customErr := fmt.Sprintf("创建商品失败: %s", err.Error())
+		response.FailWithMessage(customErr, c)
+		return
+	}
+	brand := &goods.GoodBrand{Name: r.Name}
+	createReturn, err := goodService.CreateBrand(*brand)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		global.GVA_LOG.Error("创建商品品牌失败!", zap.Error(err))
+		return
+	}
+	global.GVA_LOG.Info("创建商品品牌成功!", zap.String("name", r.Name))
+	response.OkWithDetailed(createReturn, "创建成功", c)
 }
